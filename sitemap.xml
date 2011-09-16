@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset>
+
+<url>
+  <loc>http://jamal.sourceforge.net/</loc>
+  <lastmod>2010-10-12T15:13:19+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://jamal.sourceforge.net/about.shtml</loc>
+  <lastmod>2010-10-12T15:13:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://jamal.sourceforge.net/documentation.shtml</loc>
+  <lastmod>2010-10-12T15:13:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://jamal.sourceforge.net/revisionhistory.shtml</loc>
+  <lastmod>2010-10-12T15:13:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://jamal.sourceforge.net/download.shtml</loc>
+  <lastmod>2010-10-12T15:13:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+</urlset>
