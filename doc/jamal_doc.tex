@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,twoside,12pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{tikz} %%Generate vector graphics from within LaTeX
+
+%% Please note:
+%% Images can be included using \includegraphics{filename}
+%% resp. using the dialog in the Insert menu.
+%% 
+%% The mode "LaTeX => PDF" allows the following formats:
+%%   .jpg  .png  .pdf  .mps
+%% 
+%% The modes "LaTeX => DVI", "LaTeX => PS" und "LaTeX => PS => PDF"
+%% allow the following formats:
+%%   .eps  .ps  .bmp  .pict  .pntg
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{html}
+
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide} %%Smaller margins = more text per page.
+%\usepackage{fancyhdr} %%Fancy headings
+%\usepackage{longtable} %%For tables, that exceed one page
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Remarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TODO:
+% 1. Edit the used packages and their options (see above).
+% 2. If you want, add a BibTeX-File to the project
+%    (e.g., 'literature.bib').
+% 3. Happy TeXing!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options / Modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{options} %You need a file 'options.tex' for this
+%% ==> TeXnicCenter supplies some possible option files
+%% ==> with its templates (File | New from Template...).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%% The simple version:
+\title{JAMAL 2.2 Manual}
+\author{Maksim Khadkevich}
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+%% The nice version:
+%\input{titlepage} %%You need a file 'titlepage.tex' for this.
+%% ==> TeXnicCenter supplies a possible titlepage file
+%% ==> with its templates (File | New from Template...).
+
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Table of contents
+\cleardoublepage %The first chapter should start on an odd page.
+
+\pagestyle{plain} %Now display headings: headings / fancy / ...
+
+
+
+%% Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%\input{intro} %You need a file 'intro.tex' for this.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Some hints are following:
+\def\version{2.2}
+\def\jarName{jamal-\version.jar}
+
+\section{Introduction}\label{introduction}
+JAMAL (JAva MAtlab Linking) makes it possible to call Matlab functions from java, passing and returning java primitives and their arrays. JAMAL is based on the remote method invocation (RMI) technology and allows for calling Matlab function on the fly, without saving results to a temporary file.
+
+\section{Installation and usage}\label{installation}
+
+\begin{enumerate}
+	\item   Either use precompiled \emph{lib/\jarName} or compile source files and put them into JAR archive. Ant script build.xml is provided to facilitate the compilation process.
+	\item 	Add \jarName~file to the Matlab classpath: type in the matlab prompt  
+
+\framebox{edit classpath.txt}
+
+	 and add the necessary line.
+	
+		
+	\item 	Add in the classpath of your java program \emph{\jarName}.
+	
+
+	\item 	
+	There are two possible ways to run MatlabServer: GUI mode and command-line mode. 
+	
+	To launch MatlabServer in GUI mode type in the Matlab prompt 
+
+\framebox{>>com.jamal.server.MatlabServer}
+
+  This starts server-side part of JAMAL. The following message should be normally displayed: 
+  	
+\framebox{Jamal::MatlabServer is ready}
+			
+	MatlabServer can also be launched from a java program by invoking the following MatlabClient constructor: \textit{MatlabClient(String host, String matlabExecutablePath)}. \textit{matlabExecutablePath} should be the full path to the Matlab executable (e.g. "c:/MATLAB/R2009b/bin/matlab.exe"). 
+
+	\item 	Some examples of calling Matlab functions are given in the class \textit{com.\-jamal.\-TestMatlabClient}. 
+	\textit{MatlabClient.executeMatlabFunction(String matlabFunctionName, Object[ ] inputArgs, int numberOfOutputArgs)} passes matlab finction name, input arguments and number of output arguments. One has to know exactly how many output arguments are there in the matlab function.
+	\item		In order to stop running MatlabServer one has to call \textit{MatlabClient.shutDownServer()} method. In the current implementation of JAMAL it is not possible to do it from the inside of Matlab. 
+	
+	Another option is to call the main method of class \textit{com.jamal.client.Jamal}. Calling 
+	
+\framebox{java -jar \jarName~-h <host>}	
+	
+	 from command line sends a signal to stop MatlabServer running on host <host>. 
+
+\framebox{java -jar \jarName}
+
+ without program parameters shows GUI interface with the capability of shutting down running MatlabServer.
+
+More detailed instructions with screenshots can be found \htmladdnormallink{here}{http://matlab4java.wordpress.com/}.
+  
+\end{enumerate}
+
+
+
+\section{FAQ}\label{faq}
+
+\begin{enumerate}
+	\item   \textbf{Passing multidimensional java arrays. }
+	
+	Due to some differences between Java and Matlab in the representation of multidimensional arrays, one needs to transform input Java array, that is represented in Matlab as cells into a Matlab array. The example of computing the sum of a 2-D array is given in the class \textit{com.\-jamal.\-TestMatlabClient}. Running this example requires \textit{test2dArray.m} and \textit{javaCellArgs2Matlab.m} files to be added to the Matlab path. 
+	
+	Many thanks to Harry Rostovtsev for discovering this problem in the context of JAMAL and for providing a solution for the 2-Dimensional case.  
+	
+\end{enumerate}
+
+
+
+More about linking Java and Matlab,  conversion of primitive types and their arrays you can read 
+\htmladdnormallink{Matlab tech docs}{http://www.mathworks.com/help/techdoc/matlab\_external/f6671.html}.
+
+
+\section{Similar tools}\label{similarTools}
+
+\begin{itemize}
+	\item MatlabJava server by Bowen Hui:
+
+\htmladdnormallink{http://www.cs.utoronto.ca/\~{}bowen/code/code.html\#matjav}{http://www.cs.utoronto.ca/\~bowen/code/code.html\#matjav}
+ 
+ \item MatlabControl from Kamin Whitehouse:
+
+\htmladdnormallink{http://www.cs.virginia.edu/\~{}whitehouse/matlab/JavaMatlab.html}{http://www.cs.virginia.edu/\~whitehouse/matlab/JavaMatlab.html}
+
+\end{itemize}
+
+%% A small distance to the other stuff in the table of contents (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+
+
+\end{document}
+
