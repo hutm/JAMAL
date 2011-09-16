@@ -53,10 +53,10 @@
     <target name="release" depends="jar">
         <zip destfile="${build.dir}/jamal-${version}.zip">
             <zipfileset dir="doc" includes="jamal_doc.pdf"/>
-            <zipfileset dir="." includes="build/**" />
+            <zipfileset dir="." includes="build/jamal-${version}.jar" />
             <zipfileset dir="." includes="lib/**" />
             <zipfileset dir="." includes="src/**" />
-            <zipfileset dir="." includes="test/**" />
+            <zipfileset dir="." includes="matlab/**" />
             <zipfileset dir="." includes="build.properties" />
             <zipfileset dir="." includes="LICENSE.txt" />
             <zipfileset dir="." includes="build.xml" />
