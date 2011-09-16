@@ -7,7 +7,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 20px;
 	padding: 0;
-	background: #786E50 url(images/img1.gif);
+	background: #786E50 url(../images/img1.gif);
 	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #3C3728;
@@ -56,7 +56,7 @@ a:hover {
 	width: 742px;
 	height: 112px;
 	margin: 0 auto;
-	background: url(images/img2.jpg);
+	background: url(../images/img2.jpg);
 	border: 4px solid #000000;
 }
 
@@ -105,7 +105,7 @@ a:hover {
 	width: 250px;
 	height: 26px;
 	padding: 4px 0 0 0;
-	background: url(images/img3.gif);
+	background: url(../images/img3.gif);
 	text-decoration: none;
 	text-align: center;
 	font-weight: bold;
@@ -113,7 +113,7 @@ a:hover {
 }
 
 #menu a:hover, #menu .active a {
-	background: url(images/img4.gif);
+	background: url(../images/img4.gif);
 	color: #FFFFFF;
 }
 
@@ -122,7 +122,7 @@ a:hover {
 #content {
 	width: 742px;
 	margin: 0 auto;
-	background: #786E50 url(images/img5.gif) repeat-y;
+	background: #786E50 url(../images/img5.gif) repeat-y;
 	border: 4px solid #000000;
 }
 
