@@ -8,12 +8,13 @@
     <name>jamal</name>
     <url>http://maven.apache.org</url>
 
-    <repositories>
-    <repository>
-        <id>khadkevich</id>
-        <url>http://www.khadkevich.org/</url>
-    </repository>
-    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <name>khadkevich</name>
+            <url>file:///home/hut/prg/PROJECTS/WEBPAGES/repository/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
 
