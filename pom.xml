@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <version>2.2</version>
     <name>jamal</name>
-    <url>http://maven.apache.org</url>
+    <url>http://jamal.khadkevich.org</url>
 
     <distributionManagement>
         <repository>
@@ -58,5 +58,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>
