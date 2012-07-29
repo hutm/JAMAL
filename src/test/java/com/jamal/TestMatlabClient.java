@@ -55,12 +55,15 @@ public class TestMatlabClient {
             //More sophisticated test - pass 2d array to Matlab. Requires test2dArray.m and javaCellArgs2Matlab.m to be in the Matlab path
             inArgs = new Object[1];
             inArgs[0] = new int[][]{{1, 2, 3, 4}, {4, 5, 6, 7}, {7, 4, 7, 5}};
+//
+//            outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
+//            result = (double[]) outputArgs[0];
+//            System.out.println("Sum of 2-D array is:" + result[0]);
 
-            outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
-            result = (double[]) outputArgs[0];
-            System.out.println("Sum of 2-D array is:" + result[0]);
 
-            testPassingHugeMatrices();
+//            testPassingHugeMatrices();
+
+            testPersistance();
 
             matlabClient.shutDownServer();
 
@@ -91,6 +94,26 @@ public class TestMatlabClient {
             Object[] outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
             double[] result = (double[]) outputArgs[0];
             System.out.println("Sum of 2-D array is:" + result[0]);
+
+        } catch (JamalException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void testPersistance() {
+        try {
+            MatlabClient matlabClient = new MatlabClient(MatlabCaller.HOST_ADDRESS, MatlabCaller.MATLAB_EXECUTABLE_PATH);
+
+            //First we pass an array of integers and calculate sum in Matlab
+            Object[] inArgs = new Object[1];
+
+
+            inArgs[0] = new Integer(2);
+
+            Object[] outputArgs = matlabClient.executeMatlabFunction("testSum", inArgs, 1);
+            double[] result = (double[]) outputArgs[0];
+            System.out.println("Result is:" + result[0]);
 
         } catch (JamalException e) {
             e.printStackTrace();

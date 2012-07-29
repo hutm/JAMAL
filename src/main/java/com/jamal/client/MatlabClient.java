@@ -73,7 +73,7 @@ public class MatlabClient {
                     //Now wait until Matlab starts
                     for (int i = 0; i < timeOut; i++) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                             matlabCaller = (MatlabCaller) Naming.lookup(String.format("rmi://%s:%d/%s", host, Registry.REGISTRY_PORT, MatlabCaller.SERVICE_NAME));
                             successfllyConnected = true;
                             break;

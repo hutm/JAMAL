@@ -35,7 +35,7 @@ public interface MatlabCaller extends java.rmi.Remote {
      */
     final String MATLAB_EXECUTABLE_PATH = "/opt/matlab2010/bin/matlab";
 
-    final int TIME_OUT = 10;
+    final int TIME_OUT = 20;
 
 
     /**
