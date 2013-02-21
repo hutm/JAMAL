@@ -62,18 +62,22 @@ public class MatlabClient {
     public MatlabClient(String host, String matlabExecutablePath, int timeOut) throws JamalException {
         try {
             matlabCaller = (MatlabCaller) Naming.lookup(String.format("rmi://%s:%d/%s", host, Registry.REGISTRY_PORT, MatlabCaller.SERVICE_NAME));
+        } catch (SecurityException e) {
+            e.printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
             boolean successfllyConnected = false;
             if (host.equalsIgnoreCase("localhost") || host.equals("127.0.0.1")) {
                 try {
                     System.out.println(String.format("%sMatlab host %s seems to be dead. Trying to launch MatlabServer on the localhost...", JAMAL_PREFIX, host));
                     Runtime rt = Runtime.getRuntime();
-                    String command = String.format("%s -automation -nosplash -nodesktop -r \"com.jamal.server.MatlabServer;quit;\"", matlabExecutablePath);
-                    rt.exec(command);
+                    String command = matlabExecutablePath;
+                    String args = "-nosplash -nodesktop -r \"com.jamal.server.MatlabServer;quit;\"";
+                    rt.exec(new String[]{command, args});
                     //Now wait until Matlab starts
                     for (int i = 0; i < timeOut; i++) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                             matlabCaller = (MatlabCaller) Naming.lookup(String.format("rmi://%s:%d/%s", host, Registry.REGISTRY_PORT, MatlabCaller.SERVICE_NAME));
                             successfllyConnected = true;
                             break;

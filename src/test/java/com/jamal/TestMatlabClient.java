@@ -47,29 +47,44 @@ public class TestMatlabClient {
             double[] magicArray = (double[]) outputArgs[0];
             System.out.println("The magic array from Matlab:");
             for (int i = 0; i < magicArray.length; i++) {
-                System.out.print(" " + magicArray[i]);
+                System.out.print(" " + magicArray[i] + "\r\n");
             }
-            System.out.println("");
+
+            //Uncomment the following lines to run more tests
+
+//            test2DArray();
+//            testPassingHugeMatrices();
+//            testPersistance();
 
 
-            //More sophisticated test - pass 2d array to Matlab. Requires test2dArray.m and javaCellArgs2Matlab.m to be in the Matlab path
-            inArgs = new Object[1];
-            inArgs[0] = new int[][]{{1, 2, 3, 4}, {4, 5, 6, 7}, {7, 4, 7, 5}};
-
-            outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
-            result = (double[]) outputArgs[0];
-            System.out.println("Sum of 2-D array is:" + result[0]);
-
-            testPassingHugeMatrices();
-
+            //Finally shut down MatlabServer
             matlabClient.shutDownServer();
-
 
 
         } catch (JamalException e) {
             e.printStackTrace();
         }
 
+    }
+
+
+    public static void test2DArray() {
+        Object[] inArgs;
+        Object[] outputArgs;
+        double[] result;
+        try {
+            MatlabClient matlabClient = new MatlabClient(MatlabCaller.HOST_ADDRESS, MatlabCaller.MATLAB_EXECUTABLE_PATH);
+            //More sophisticated test - pass 2d array to Matlab. Requires test2dArray.m and javaCellArgs2Matlab.m to be in the Matlab path
+            inArgs = new Object[1];
+            inArgs[0] = new int[][]{{1, 2, 3, 4}, {4, 5, 6, 7}, {7, 4, 7, 5}};
+
+            outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
+            result = (double[]) outputArgs[0];
+            System.out.println("Sum of 2-D array = " + result[0] + "\r\n");
+
+        } catch (JamalException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void testPassingHugeMatrices() {
@@ -79,11 +94,11 @@ public class TestMatlabClient {
             //First we pass an array of integers and calculate sum in Matlab
             Object[] inArgs = new Object[1];
 
-            int length = 8000;
+            int length = 10000;
             int[][] matrix = new int[length][length];
-            for(int i = 0; i < matrix.length; i++){
-                for(int j = 0; j < matrix[0].length; j++){
-                    matrix[i][j] = i+j;
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    matrix[i][j] = i + j;
                 }
             }
             inArgs[0] = matrix;
@@ -91,6 +106,26 @@ public class TestMatlabClient {
             Object[] outputArgs = matlabClient.executeMatlabFunction("test2dArray", inArgs, 1);
             double[] result = (double[]) outputArgs[0];
             System.out.println("Sum of 2-D array is:" + result[0]);
+
+        } catch (JamalException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void testPersistance() {
+        try {
+            MatlabClient matlabClient = new MatlabClient(MatlabCaller.HOST_ADDRESS, MatlabCaller.MATLAB_EXECUTABLE_PATH);
+
+            //First we pass an array of integers and calculate sum in Matlab
+            Object[] inArgs = new Object[1];
+
+
+            inArgs[0] = new Integer(2);
+
+            Object[] outputArgs = matlabClient.executeMatlabFunction("testSum", inArgs, 1);
+            double[] result = (double[]) outputArgs[0];
+            System.out.println("Result is:" + result[0]);
 
         } catch (JamalException e) {
             e.printStackTrace();
