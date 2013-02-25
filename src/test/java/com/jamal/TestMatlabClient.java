@@ -58,7 +58,7 @@ public class TestMatlabClient {
 
 
             //Finally shut down MatlabServer
-            matlabClient.shutDownServer();
+//            matlabClient.shutDownServer();
 
 
         } catch (JamalException e) {
@@ -85,6 +85,7 @@ public class TestMatlabClient {
         } catch (JamalException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void testPassingHugeMatrices() {
