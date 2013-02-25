@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
   "http://www.w3.org/TR/html4/loose.dtd">  
 <html > 
-<head><title>JAMAL 2.3Manual</title> 
+<head><title>JAMAL 2.3 Manual</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="jamal_doc.tex"> 
-<meta name="date" content="2013-02-21 22:50:00"> 
+<meta name="date" content="2013-02-25 18:43:00"> 
 <link rel="stylesheet" type="text/css" href="jamal_doc.css"> 
 </head><body 
 >
@@ -16,11 +16,11 @@
 
                                                                           
 
-<h2 class="titleHead">JAMAL 2.3Manual</h2>
+<h2 class="titleHead">JAMAL 2.3&#x00A0;Manual</h2>
 <div class="author" ><span 
 class="ec-lmr-12x-x-120">Maksim Khadkevich</span></div><br />
 <div class="date" ><span 
-class="ec-lmr-12x-x-120">February 21, 2013</span></div>
+class="ec-lmr-12x-x-120">February 25, 2013</span></div>
                                                                           
 
                                                                           
@@ -36,8 +36,6 @@ href="#x1-20000.1" id="QQ2-1-2">Introduction</a></span>
 href="#x1-30000.2" id="QQ2-1-3">Installation and usage</a></span>
 <br />   &#x00A0;<span class="sectionToc" >0.3 <a 
 href="#x1-40000.3" id="QQ2-1-4">FAQ</a></span>
-<br />   &#x00A0;<span class="sectionToc" >0.4 <a 
-href="#x1-50000.4" id="QQ2-1-5">Similar tools</a></span>
    </div>
                                                                           
 
@@ -81,29 +79,25 @@ class="ec-lmri-12">jamal-2.3.jar</span>.
       <li 
   class="enumerate" id="x1-3008x4">If you are planning to pass huge data arrays to Matlab, you should
       increase Java heap size (otherwise OutOfMemory exception would be
-      thrown). <a 
- id="x1-30074"></a>
-      <!--l. 144--><p class="noindent" >Create           a           text           file           named           java.opts
+      thrown).
+      <!--l. 142--><p class="noindent" >Create           a           text           file           named           java.opts
       in the $MATLABROOT/bin/$ARCH directory. $MATLABROOT is
       the MATLAB root directory and $ARCH is your system architecture,
       which you find by typing at the MATLAB Command Prompt:
-      <div class="fbox">matlabroot; computer(&#8217;arch&#8217;)</div>
+      <div class="fbox">matlabroot computer(&#8217;arch&#8217;)</div>
                                                                           
 
                                                                           
-      <!--l. 148--><p class="noindent" >Put the following line in java.opts to set heap space limit to 3000 MB:
-      <div class="fbox">-Xmx=3000m</div>
-      <!--l. 152--><p class="noindent" >Restart Matlab.
       </li>
       <li 
   class="enumerate" id="x1-3010x5">There  are  two  possible  ways  to  run  MatlabServer:  GUI  mode  and
       command-line mode.
-      <!--l. 157--><p class="noindent" >To launch MatlabServer in GUI mode type in the Matlab prompt
+      <!--l. 150--><p class="noindent" >To launch MatlabServer in GUI mode type in the Matlab prompt
       <div class="fbox">»com.jamal.server.MatlabServer</div>
-      <!--l. 161--><p class="noindent" >This starts server-side part of JAMAL. The following message should
+      <!--l. 154--><p class="noindent" >This starts server-side part of JAMAL. The following message should
       be normally displayed:
       <div class="fbox">Jamal::MatlabServer is ready</div>
-      <!--l. 165--><p class="noindent" >MatlabServer                     can                     also                     be
+      <!--l. 158--><p class="noindent" >MatlabServer                     can                     also                     be
       launched from a java program by invoking the following MatlabClient
       constructor: <span 
 class="ec-lmri-12">MatlabClient(String host, String matlabExecutablePath)</span>.
@@ -129,30 +123,30 @@ class="ec-lmri-12">MatlabClient.shutDownServer() </span>method. In the current
       implementation of JAMAL it is <span 
 class="ec-lmbx-12">not </span>possible to do it from the inside
       of Matlab (for example, using CTRL+C).
-      <!--l. 171--><p class="noindent" >Another    option    is    to    call    the    main    method    of    class
+      <!--l. 164--><p class="noindent" >Another    option    is    to    call    the    main    method    of    class
       <span 
 class="ec-lmri-12">com.jamal.client.Jamal</span>. Calling
       <div class="fbox">java -jar jamal-2.3.jar&#x00A0;-h &#x003C;host&#x003E;</div>
-      <!--l. 175--><p class="noindent" >from command line sends a signal to stop MatlabServer running on
+      <!--l. 168--><p class="noindent" >from command line sends a signal to stop MatlabServer running on
       host &#x003C;host&#x003E;.
       <div class="fbox">java -jar jamal-2.3.jar</div>
+      <!--l. 172--><p class="noindent" >without program parameters shows GUI interface with the capability
+      of shutting down running MatlabServer.
+      <!--l. 174--><p class="noindent" >More detailed instructions with screenshots can be found <a 
+href="http://matlab4java.wordpress.com/" >here</a>.
+      </li></ol>
                                                                           
 
                                                                           
-      <!--l. 179--><p class="noindent" >without program parameters shows GUI interface with the capability
-      of shutting down running MatlabServer.
-      <!--l. 181--><p class="noindent" >More detailed instructions with screenshots can be found <a 
-href="http://matlab4java.wordpress.com/" >here</a>.
-      </li></ol>
-<!--l. 187--><p class="noindent" >
+<!--l. 180--><p class="noindent" >
    <h3 class="sectionHead"><span class="titlemark">0.3   </span> <a 
  id="x1-40000.3"></a>FAQ</h3>
-<!--l. 189--><p class="noindent" >
+<!--l. 182--><p class="noindent" >
       <ol  class="enumerate1" >
       <li 
   class="enumerate" id="x1-4002x1"><span 
 class="ec-lmbx-12">Passing multidimensional java arrays.</span>
-      <!--l. 192--><p class="noindent" >Due to some differences between Java and Matlab in the representation
+      <!--l. 185--><p class="noindent" >Due to some differences between Java and Matlab in the representation
       of  multidimensional  arrays,  one  needs  to  transform  input  Java
       array,  that  is  represented  in  Matlab  as  cells  into  a  Matlab  array.
       The  example  of  computing  the  sum  of  a  2-D  array  is  given  in
@@ -162,34 +156,13 @@ class="ec-lmri-12">com.jamal.TestMatlabClient</span>. Running this example requi
 class="ec-lmri-12">test2dArray.m  </span>and  <span 
 class="ec-lmri-12">javaCellArgs2Matlab.m  </span>files  to  be  added  to  the
       Matlab path.
-      <!--l. 194--><p class="noindent" >To           test           passing           large           data           arrays,
-      uncomment <span 
-class="ec-lmri-12">testPassingHugeMatrices() </span>functions. This function passes
-      to Matlab 10000x10000 array and outputs sum of all the elements. Do
-      not forget adjust java heap size (see <a 
-href="#x1-30074">4<!--tex4ht:ref: java.opts --></a>).
-      <!--l. 196--><p class="noindent" >Many thanks to Harry Rostovtsev for discovering this problem in the
+      <!--l. 187--><p class="noindent" >Many thanks to Harry Rostovtsev for discovering this problem in the
       context of JAMAL and for providing a solution for the 2-Dimensional
       case.
       </li></ol>
-<!--l. 202--><p class="noindent" >More about linking Java and Matlab, conversion of primitive types and their
+<!--l. 193--><p class="noindent" >More about linking Java and Matlab, conversion of primitive types and their
 arrays you can read <a 
-href="http://www.mathworks.com/help/techdoc/matlab_external/f6671.html" >Matlab tech docs</a>.
-<!--l. 206--><p class="noindent" >
-   <h3 class="sectionHead"><span class="titlemark">0.4   </span> <a 
- id="x1-50000.4"></a>Similar tools</h3>
-                                                                          
-
-                                                                          
-      <ul class="itemize1">
-      <li class="itemize">MatlabJava server by Bowen Hui:
-      <!--l. 211--><p class="noindent" ><a 
-href="http://www.cs.utoronto.ca/~bowen/code/code.html#matjav" >http://www.cs.utoronto.ca/&#x02DC;bowen/code/code.html#matjav</a>
-      </li>
-      <li class="itemize">MatlabControl from Kamin Whitehouse:
-      <!--l. 215--><p class="noindent" ><a 
-href="http://www.cs.virginia.edu/~whitehouse/matlab/JavaMatlab.html" >http://www.cs.virginia.edu/&#x02DC;whitehouse/matlab/JavaMatlab.html</a>
-      </li></ul>
+href="http://www.mathworks.it/it/help/matlab/matlab_external/passing-data-to-a-java-method.html" >Matlab tech docs</a>.
     
 </body></html> 
 

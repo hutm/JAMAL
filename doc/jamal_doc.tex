@@ -76,7 +76,8 @@
 %% ==> with its templates (File | New from Template...).
 
 
-
+\def\version{2.3}
+\def\jarName{jamal-\version.jar}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,7 +90,7 @@
 %% ==> Write your text here or include other files.
 
 %% The simple version:
-\title{JAMAL 2.2 Manual}
+\title{JAMAL \version~Manual}
 \author{Maksim Khadkevich}
 %\date{} %%If commented, the current date is used.
 \maketitle
@@ -116,8 +117,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% ==> Some hints are following:
-\def\version{2.2}
-\def\jarName{jamal-\version.jar}
+
 
 \section{Introduction}\label{introduction}
 JAMAL (JAva MAtlab Linking) makes it possible to call Matlab functions from java, passing and returning java primitives and their arrays. JAMAL is based on the remote method invocation (RMI) technology and allows for calling Matlab function on the fly, without saving results to a temporary file.
@@ -125,17 +125,25 @@ JAMAL (JAva MAtlab Linking) makes it possible to call Matlab functions from java
 \section{Installation and usage}\label{installation}
 
 \begin{enumerate}
-	\item   Either use precompiled \emph{lib/\jarName} or compile source files and put them into JAR archive. Ant script build.xml is provided to facilitate the compilation process.
+	\item   Either use precompiled \emph{lib/\jarName} or compile source files and put them into JAR archive. Ant script build.xml is provided to facilitate the compilation process. 
+
+\textbf{!!!Important!!!} If you decided to compile JAMAL, do not forget to invoke \htmladdnormallink{rmic}{http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/rmic.html} compiler to generate MatlabCallerImpl\_Stub.class, otherwise you will not be able to connect to MatlabServer.  
 	\item 	Add \jarName~file to the Matlab classpath: type in the matlab prompt  
 
 \framebox{edit classpath.txt}
 
-	 and add the necessary line.
+	 and add the necessary line (for example: "c:/soft/jamal/\jarName").
 	
 		
 	\item 	Add in the classpath of your java program \emph{\jarName}.
 	
+	\item If you are planning to pass huge data arrays to Matlab, you should increase Java heap size (otherwise OutOfMemory exception would be thrown). 
 
+Create a text file named java.opts in the \$MATLABROOT/bin/\$ARCH directory. \$MATLABROOT is the MATLAB root directory and \$ARCH is your system architecture, which you find by typing at the MATLAB Command Prompt: 
+
+\framebox{matlabroot
+
+computer('arch')}
 	\item 	
 	There are two possible ways to run MatlabServer: GUI mode and command-line mode. 
 	
@@ -149,9 +157,9 @@ JAMAL (JAva MAtlab Linking) makes it possible to call Matlab functions from java
 			
 	MatlabServer can also be launched from a java program by invoking the following MatlabClient constructor: \textit{MatlabClient(String host, String matlabExecutablePath)}. \textit{matlabExecutablePath} should be the full path to the Matlab executable (e.g. "c:/MATLAB/R2009b/bin/matlab.exe"). 
 
-	\item 	Some examples of calling Matlab functions are given in the class \textit{com.\-jamal.\-TestMatlabClient}. 
+	\item 	Some examples of calling Matlab functions are given in the class \textit{TestMatlabClient}. 
 	\textit{MatlabClient.executeMatlabFunction(String matlabFunctionName, Object[ ] inputArgs, int numberOfOutputArgs)} passes matlab finction name, input arguments and number of output arguments. One has to know exactly how many output arguments are there in the matlab function.
-	\item		In order to stop running MatlabServer one has to call \textit{MatlabClient.shutDownServer()} method. In the current implementation of JAMAL it is not possible to do it from the inside of Matlab. 
+	\item		In order to stop running MatlabServer one has to call \textit{MatlabClient.shutDownServer()} method. In the current implementation of JAMAL it is \textbf{not} possible to do it from the inside of Matlab (for example, using CTRL+C). 
 	
 	Another option is to call the main method of class \textit{com.jamal.client.Jamal}. Calling 
 	
@@ -183,21 +191,21 @@ More detailed instructions with screenshots can be found \htmladdnormallink{here
 
 
 More about linking Java and Matlab,  conversion of primitive types and their arrays you can read 
-\htmladdnormallink{Matlab tech docs}{http://www.mathworks.com/help/techdoc/matlab\_external/f6671.html}.
+\htmladdnormallink{Matlab tech docs}{http://www.mathworks.it/it/help/matlab/matlab\_external/passing-data-to-a-java-method.html}.
 
 
-\section{Similar tools}\label{similarTools}
-
-\begin{itemize}
-	\item MatlabJava server by Bowen Hui:
-
-\htmladdnormallink{http://www.cs.utoronto.ca/\~{}bowen/code/code.html\#matjav}{http://www.cs.utoronto.ca/\~bowen/code/code.html\#matjav}
- 
- \item MatlabControl from Kamin Whitehouse:
-
-\htmladdnormallink{http://www.cs.virginia.edu/\~{}whitehouse/matlab/JavaMatlab.html}{http://www.cs.virginia.edu/\~whitehouse/matlab/JavaMatlab.html}
-
-\end{itemize}
+% \section{Similar tools}\label{similarTools}
+% 
+% \begin{itemize}
+% 	\item MatlabJava server by Bowen Hui:
+% 
+% \htmladdnormallink{http://www.cs.utoronto.ca/\~{}bowen/code/code.html\#matjav}{http://www.cs.utoronto.ca/\~bowen/code/code.html\#matjav}
+%  
+%  \item MatlabControl from Kamin Whitehouse:
+% 
+% \htmladdnormallink{http://www.cs.virginia.edu/\~{}whitehouse/matlab/JavaMatlab.html}{http://www.cs.virginia.edu/\~whitehouse/matlab/JavaMatlab.html}
+% 
+% \end{itemize}
 
 %% A small distance to the other stuff in the table of contents (toc)
 \addtocontents{toc}{\protect\vspace*{\baselineskip}}
