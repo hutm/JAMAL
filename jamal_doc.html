@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>JAMAL 2.3 Manual</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="jamal_doc.tex"> 
+<meta name="date" content="2013-02-25 18:43:00"> 
+<link rel="stylesheet" type="text/css" href="jamal_doc.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                          
+
+                                                                          
+
+<h2 class="titleHead">JAMAL 2.3&#x00A0;Manual</h2>
+<div class="author" ><span 
+class="ec-lmr-12x-x-120">Maksim Khadkevich</span></div><br />
+<div class="date" ><span 
+class="ec-lmr-12x-x-120">February 25, 2013</span></div>
+                                                                          
+
+                                                                          
+   </div>
+                                                                          
+
+                                                                          
+   <h2 class="likechapterHead"><a 
+ id="x1-1000"></a>Contents</h2> <div class="tableofcontents">
+   &#x00A0;<span class="sectionToc" >0.1 <a 
+href="#x1-20000.1" id="QQ2-1-2">Introduction</a></span>
+<br />   &#x00A0;<span class="sectionToc" >0.2 <a 
+href="#x1-30000.2" id="QQ2-1-3">Installation and usage</a></span>
+<br />   &#x00A0;<span class="sectionToc" >0.3 <a 
+href="#x1-40000.3" id="QQ2-1-4">FAQ</a></span>
+   </div>
+                                                                          
+
+                                                                          
+                                                                          
+
+                                                                          
+   <h3 class="sectionHead"><span class="titlemark">0.1   </span> <a 
+ id="x1-20000.1"></a>Introduction</h3>
+<!--l. 123--><p class="noindent" >JAMAL (JAva MAtlab Linking) makes it possible to call Matlab functions from
+java, passing and returning java primitives and their arrays. JAMAL is
+based on the remote method invocation (RMI) technology and allows for
+calling Matlab function on the fly, without saving results to a temporary
+file.
+<!--l. 125--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">0.2   </span> <a 
+ id="x1-30000.2"></a>Installation and usage</h3>
+<!--l. 127--><p class="noindent" >
+      <ol  class="enumerate1" >
+      <li 
+  class="enumerate" id="x1-3002x1">Either use precompiled <span 
+class="ec-lmri-12">lib/jamal-2.3.jar </span>or compile source files and put
+      them into JAR archive. Ant script build.xml is provided to facilitate
+      the compilation process.
+      <!--l. 130--><p class="noindent" ><span 
+class="ec-lmbx-12">!!!Important!!! </span>If  you  decided  to  compile  JAMAL,  do  not  forget
+      to  invoke  <a 
+href="http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/rmic.html" >rmic</a>  compiler  to  generate  MatlabCallerImpl_Stub.class,
+      otherwise you will not be able to connect to MatlabServer.
+      </li>
+      <li 
+  class="enumerate" id="x1-3004x2">Add  jamal-2.3.jar&#x00A0;file  to  the  Matlab  classpath:  type  in  the  matlab
+      prompt
+      <div class="fbox">edit classpath.txt</div>
+      <!--l. 135--><p class="noindent" >and add the necessary line (for example: "c:/soft/jamal/jamal-2.3.jar").
+      </li>
+      <li 
+  class="enumerate" id="x1-3006x3">Add in the classpath of your java program <span 
+class="ec-lmri-12">jamal-2.3.jar</span>.
+      </li>
+      <li 
+  class="enumerate" id="x1-3008x4">If you are planning to pass huge data arrays to Matlab, you should
+      increase Java heap size (otherwise OutOfMemory exception would be
+      thrown).
+      <!--l. 142--><p class="noindent" >Create           a           text           file           named           java.opts
+      in the $MATLABROOT/bin/$ARCH directory. $MATLABROOT is
+      the MATLAB root directory and $ARCH is your system architecture,
+      which you find by typing at the MATLAB Command Prompt:
+      <div class="fbox">matlabroot computer(&#8217;arch&#8217;)</div>
+                                                                          
+
+                                                                          
+      </li>
+      <li 
+  class="enumerate" id="x1-3010x5">There  are  two  possible  ways  to  run  MatlabServer:  GUI  mode  and
+      command-line mode.
+      <!--l. 150--><p class="noindent" >To launch MatlabServer in GUI mode type in the Matlab prompt
+      <div class="fbox">»com.jamal.server.MatlabServer</div>
+      <!--l. 154--><p class="noindent" >This starts server-side part of JAMAL. The following message should
+      be normally displayed:
+      <div class="fbox">Jamal::MatlabServer is ready</div>
+      <!--l. 158--><p class="noindent" >MatlabServer                     can                     also                     be
+      launched from a java program by invoking the following MatlabClient
+      constructor: <span 
+class="ec-lmri-12">MatlabClient(String host, String matlabExecutablePath)</span>.
+      <span 
+class="ec-lmri-12">matlabExecutablePath </span>should be the full path to the Matlab executable
+      (e.g. "c:/MATLAB/R2009b/bin/matlab.exe").
+      </li>
+      <li 
+  class="enumerate" id="x1-3012x6">Some   examples   of   calling   Matlab   functions   are   given   in   the
+      class   <span 
+class="ec-lmri-12">TestMatlabClient</span>.   <span 
+class="ec-lmri-12">MatlabClient.executeMatlabFunction(String</span>
+      <span 
+class="ec-lmri-12">matlabFunctionName, Object[ ] inputArgs, int numberOfOutputArgs)</span>
+      passes matlab finction name, input arguments and number of output
+      arguments. One has to know exactly how many output arguments are
+      there in the matlab function.
+      </li>
+      <li 
+  class="enumerate" id="x1-3014x7">In         order         to         stop         running         MatlabServer
+      one has to call <span 
+class="ec-lmri-12">MatlabClient.shutDownServer() </span>method. In the current
+      implementation of JAMAL it is <span 
+class="ec-lmbx-12">not </span>possible to do it from the inside
+      of Matlab (for example, using CTRL+C).
+      <!--l. 164--><p class="noindent" >Another    option    is    to    call    the    main    method    of    class
+      <span 
+class="ec-lmri-12">com.jamal.client.Jamal</span>. Calling
+      <div class="fbox">java -jar jamal-2.3.jar&#x00A0;-h &#x003C;host&#x003E;</div>
+      <!--l. 168--><p class="noindent" >from command line sends a signal to stop MatlabServer running on
+      host &#x003C;host&#x003E;.
+      <div class="fbox">java -jar jamal-2.3.jar</div>
+      <!--l. 172--><p class="noindent" >without program parameters shows GUI interface with the capability
+      of shutting down running MatlabServer.
+      <!--l. 174--><p class="noindent" >More detailed instructions with screenshots can be found <a 
+href="http://matlab4java.wordpress.com/" >here</a>.
+      </li></ol>
+                                                                          
+
+                                                                          
+<!--l. 180--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">0.3   </span> <a 
+ id="x1-40000.3"></a>FAQ</h3>
+<!--l. 182--><p class="noindent" >
+      <ol  class="enumerate1" >
+      <li 
+  class="enumerate" id="x1-4002x1"><span 
+class="ec-lmbx-12">Passing multidimensional java arrays.</span>
+      <!--l. 185--><p class="noindent" >Due to some differences between Java and Matlab in the representation
+      of  multidimensional  arrays,  one  needs  to  transform  input  Java
+      array,  that  is  represented  in  Matlab  as  cells  into  a  Matlab  array.
+      The  example  of  computing  the  sum  of  a  2-D  array  is  given  in
+      the class <span 
+class="ec-lmri-12">com.jamal.TestMatlabClient</span>. Running this example requires
+      <span 
+class="ec-lmri-12">test2dArray.m  </span>and  <span 
+class="ec-lmri-12">javaCellArgs2Matlab.m  </span>files  to  be  added  to  the
+      Matlab path.
+      <!--l. 187--><p class="noindent" >Many thanks to Harry Rostovtsev for discovering this problem in the
+      context of JAMAL and for providing a solution for the 2-Dimensional
+      case.
+      </li></ol>
+<!--l. 193--><p class="noindent" >More about linking Java and Matlab, conversion of primitive types and their
+arrays you can read <a 
+href="http://www.mathworks.it/it/help/matlab/matlab_external/passing-data-to-a-java-method.html" >Matlab tech docs</a>.
+    
+</body></html> 
+
+                                                                          
+
+
