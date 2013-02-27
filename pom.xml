@@ -3,7 +3,7 @@
     <groupId>com.jamal</groupId>
     <artifactId>jamal</artifactId>
     <packaging>jar</packaging>
-    <version>2.3</version>
+    <version>2.3-SNAPSHOT</version>
     <name>jamal</name>
     <url>http://jamal.khadkevich.org</url>
 
