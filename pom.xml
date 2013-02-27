@@ -29,6 +29,13 @@
         </repository>
     </distributionManagement>
 
+    <scm>
+        <connection>scm:git:https://github.com/hutm/JAMAL.git</connection>
+        <developerConnection>scm:git:https://github.com/hutm/JAMAL.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/hutm/JAMAL.git</url>
+    </scm>
+
     <dependencies>
 
         <dependency>
