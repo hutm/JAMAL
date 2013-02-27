@@ -20,7 +20,7 @@
         <snapshotRepository>
             <id>repo-snapshot</id>
             <name>Snapshots repository</name>
-            <url>${env.MAVEN_ARTIFACTORY}</url>
+            <url>${env.MAVEN_ARTIFACTORY_SNAPSHOTS}</url>
         </snapshotRepository>
         <repository>
             <id>repo-release</id>
