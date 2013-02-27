@@ -16,6 +16,19 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>repo-snapshot</id>
+            <name>Snapshots repository</name>
+            <url>${env.MAVEN_ARTIFACTORY}</url>
+        </snapshotRepository>
+        <repository>
+            <id>repo-release</id>
+            <name>Release repository</name>
+            <url>${env.MAVEN_ARTIFACTORY}</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
 
         <dependency>
