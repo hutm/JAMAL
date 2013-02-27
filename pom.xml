@@ -30,10 +30,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/hutm/JAMAL.git</connection>
-        <developerConnection>scm:git:git://github.com/hutm/JAMAL.git</developerConnection>
-        <tag>HEAD</tag>
-        <url>https://github.com/hutm/JAMAL.git</url>
+        <connection>scm:git:git@github.com:hutm/JAMAL.git</connection>
+        <developerConnection>scm:git:git@github.com:hutm/JAMAL.git</developerConnection>
+        <url>scm:git:git@github.com:hutm/JAMAL.git</url>
     </scm>
 
     <dependencies>
